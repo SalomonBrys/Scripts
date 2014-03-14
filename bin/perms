@@ -1,0 +1,19 @@
+#!/bin/sh
+
+name="`whoami`"
+
+echo "=========================================="
+echo "DIRECTORIES: OWN + MOD"
+find . -type d -exec sudo chown -vv $name: {} \; -exec chmod -v 755 {} \;
+
+echo "=========================================="
+echo "FILES: OWN"
+find . -type f -exec sudo chown -vv $name: {} \;
+
+echo "=========================================="
+echo "FILES NOT EXEC: MOD"
+find . -type f -not -perm -100 -exec chmod -vv 644 {} \;
+
+echo "=========================================="
+echo "FILES EXEC: MOD"
+find . -type f -perm -100 -exec chmod -vv 755 {} \;

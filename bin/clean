@@ -1,0 +1,34 @@
+#!/bin/sh -e
+
+findRecOpt=""
+findFilesOpt="-name *~ -or -name '#*#' -or -name '.#*#' -or -name .DS_Store -or -name thumbs.db"
+
+while getopts 'hnd' OPTION
+do
+    case $OPTION in
+	h)
+	    echo "Usage: clean [OPTION]... [DIR]"
+	    echo "  -h   Display this help"
+	    echo "  -n   No recursive"
+	    echo "  -d   Delete diff files"
+	    echo "If no directory is defined, cleans current directory (./)"
+	    exit
+	    ;;
+	n)
+	    findRecOpt="-maxdepth 1"
+	    ;;
+	d)
+	    findFilesOpt="$findFilesOpt -or -name *.BASE.* -or -name *.LOCAL.* -or -name *.BACKUP.* -or -name *.REMOTE.* -or -name *.orig"
+	    ;;
+    esac
+done
+shift $(($OPTIND - 1))
+
+dir=.
+
+if [ "$1" != "" ]; then
+    dir="$1"
+fi
+
+set -f
+find $dir $findRecOpt -type f \( $findFilesOpt \) -exec rm -vf {} \;

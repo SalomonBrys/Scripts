@@ -1,0 +1,11 @@
+#!/bin/sh
+
+while true
+do
+	$*
+	if [ $? == 0 ]; then
+		break
+	fi
+	/bin/echo -n .
+	sleep 1
+done

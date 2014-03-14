@@ -1,0 +1,83 @@
+# Lines configured by zsh-newuser-install
+HISTFILE=~/.histfile_zsh
+HISTSIZE=5000
+SAVEHIST=5000
+setopt extendedglob
+unsetopt beep
+bindkey -e
+# End of lines configured by zsh-newuser-install
+# The following lines were added by compinstall
+
+zstyle ':completion:*' completer _complete _ignored _match _prefix
+zstyle ':completion:*' file-sort name
+zstyle ':completion:*' insert-unambiguous true
+zstyle ':completion:*' list-colors ''
+zstyle ':completion:*' list-prompt %SAt %p: Hit TAB for more, or the character to insert%s
+zstyle ':completion:*' matcher-list '' 'm:{[:lower:][:upper:]}={[:upper:][:lower:]}'
+zstyle ':completion:*' menu select=1
+zstyle ':completion:*' preserve-prefix '//[^/]##/'
+zstyle ':completion:*' select-prompt %SScrolling active: current selection at %p%s
+zstyle ':completion:*' squeeze-slashes true
+zstyle :compinstall filename '/home/salomon/.zshrc'
+
+autoload -Uz compinit
+compinit
+# End of lines added by compinstall
+
+# Additional Conf
+TMOUT=0				# No screen timeout
+unsetopt autoremoveslash	# Do not remove slash at the end of a directory
+setopt autopushd		# Make cd push the old directory onto the directory stack, can back the history of dir with popd
+setopt correct			# Spell correction on commands
+setopt correctall		# Spell correction on arguments and files
+setopt globdots			# Pattern matching includes dot files when starting with a *
+setopt histignoredups		# Do not save the current line in the history if the previous is the same
+setopt histignorespace		# Do not save a line in the history if it begins with a space
+setopt noclobber		# Prevent from overwriting an existing file by a > redirection, use >! to force
+
+
+# Environment
+export SHELL="/bin/zsh"
+export EDITOR="emacs"
+export BROWSER="google-chrome"
+export PATH="$PATH:/usr/local/bin"
+export LESS="-R"
+
+# Aliases
+if [ `uname` = "Darwin" ]; then
+    alias ls="ls -G"
+else
+    alias ls="ls --color"
+fi
+alias emacs="emacs -nw"
+alias termreset='echo -e "\xF"'
+
+# Prompt & motd Variables
+pr_n=${(%):-%n}
+pr_m=${(%):-%m}
+figletOpt="-tc -f big"
+figletMessage="Bonjour Maitre"
+sedCmd="sed -r"
+if [ "$(uname -s)" = "Darwin" ]; then
+    sedCmd="sed -E"
+fi
+
+# Additional conf files
+if [ -r $HOME/.zshrc.spec ]; then
+    source $HOME/.zshrc.spec
+fi
+
+# Prompt
+if [ -r $HOME/.zshrc.prompt ]; then
+    source $HOME/.zshrc.prompt
+fi
+
+# MOTD
+if which figlet > /dev/null; then
+    if [ "$figletMessage" != "" ]; then
+        eval figlet $figletOpt $figletMessage
+    fi
+fi
+
+# added by travis gem
+[ -f /Users/salomon/.travis/travis.sh ] && source /Users/salomon/.travis/travis.sh

@@ -1,0 +1,50 @@
+#!/bin/bash
+
+. /etc/make.conf
+. /etc/init.d/functions.sh
+
+if [ -z "$PORTAGE_TMPDIR" ]; then
+  PORTAGE_TMPDIR="/var/tmp/portage"
+fi
+
+TMPDIR_TMPFILE=${PORTAGE_TMPDIR}/.mountedByTEmerge
+
+mounttmpfs() {
+    if [ -z "$(mount | grep ${PORTAGE_TMPDIR})" ]; then
+	ebegin "Mounting tmpfs on ${PORTAGE_TMPDIR}"
+	mount ${PORTAGE_TMPDIR}
+	eend $?
+	touch ${TMPDIR_TMPFILE}
+    else
+	ewarn "Tmpfs already mounted on ${PORTAGE_TMPDIR}!"
+    fi
+}
+
+compile() {
+    einfo "running emerge ${*}"
+    emerge ${*}
+}
+
+umounttmpfs() {
+    proc=$(pgrep temerge)
+    if [ $(echo $proc | wc -w) -gt 1 ]; then
+	ewarn "Other instances of TEmerge are running"
+    else
+	if [ -f ${TMPDIR_TMPFILE} ]; then
+	    ebegin "unmounting tmpfs"
+	    umount -f ${PORTAGE_TMPDIR}
+	    eend $?
+	else
+	    ewarn "${PORTAGE_TMPDIR} was not mounted by TEmerge"
+	fi
+    fi
+    
+}
+
+mounttmpfs
+
+# run emerge
+compile $@
+
+# unmount tmpfs
+umounttmpfs
