@@ -14,7 +14,7 @@ fi
 
 mkdir -p /usr/local/bin
 
-for f in bin/*; do
-    ln -vfs "$DIR/$f" /usr/local/bin/$(basename $f)
+for f in $DIR/bin/*; do
+    ln -vfs $f /usr/local/bin/$(basename $f)
 done
 
