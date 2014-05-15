@@ -12,8 +12,6 @@ elif [ ! ${DIR:0:1} == "/" ]; then
     DIR=$(pwd)/$(dirname "$0")
 fi
 
-exit
-
 mkdir -p /usr/local/bin
 
 for f in bin/*; do
