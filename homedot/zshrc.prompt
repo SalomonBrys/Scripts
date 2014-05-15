@@ -12,7 +12,7 @@ function precmd {
     local promptsize=${#${(%):---(%~)---(%D{$PR_DATE_FORMAT})--}}
 
     # If there is a battery, get it's loading value
-    if which acpi > /dev/null; then
+    if which acpi > /dev/null 2>&1; then
 	battery=`acpi -b | cut -d, -f2 | xargs echo`
 	PR_BATTERY="$PR_BOLD$PR_COL($PR_RESET$PR_YELLOW$battery%$PR_BOLD$PR_COL)$PR_RESET$PR_SHIFT_IN$PR_COL$PR_HBAR$PR_SHIFT_OUT"
 	local batterysize=${#${battery}}

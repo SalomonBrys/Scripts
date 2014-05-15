@@ -73,7 +73,7 @@ if [ -r $HOME/.zshrc.prompt ]; then
 fi
 
 # MOTD
-if which figlet > /dev/null; then
+if which figlet > /dev/null 2>&1; then
     if [ "$figletMessage" != "" ]; then
         eval figlet $figletOpt $figletMessage
     fi
