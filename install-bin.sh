@@ -8,9 +8,11 @@ fi
 DIR=$(dirname "$0")
 if [ "$DIR" == "." ]; then
     DIR=$(pwd)
-else
+elif [ ! ${DIR:0:1} == "/" ]; then
     DIR=$(pwd)/$(dirname "$0")
 fi
+
+exit
 
 mkdir -p /usr/local/bin
 
