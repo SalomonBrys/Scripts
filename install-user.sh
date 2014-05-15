@@ -17,11 +17,19 @@ if [ -d $HOME/.kde4/share/kde4/services ]; then
     done
 fi
 
-/bin/echo -n "Please input your full name: "
-read name
+if [ "$1" == "" ]; then
+    /bin/echo -n "Please input your full name: "
+    read name
+else
+    name="$1"
+fi
 
-/bin/echo -n "Please input your email address: "
-read email
+if [ "$2" == "" ]; then
+    /bin/echo -n "Please input your email address: "
+    read email
+else
+    email="$2"
+fi
 
 echo "Git User: $name <$email>"
 
