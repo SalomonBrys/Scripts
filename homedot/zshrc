@@ -12,4 +12,3 @@ source $CODE/Scripts/zsh/user-config.sh
 if [ -r $HOME/.zshrc.spec ]; then
     source $HOME/.zshrc.spec
 fi
-    

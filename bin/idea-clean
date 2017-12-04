@@ -1,0 +1,3 @@
+#!/bin/sh
+
+find . \( \( -type d \( -name .gradle -or -name build -or -name .idea -or -name .externalNativeBuild \) \) -or \( -type f \( -name '*.iml' \) \) \) -exec rm -rf {} \;

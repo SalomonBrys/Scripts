@@ -18,7 +18,7 @@ do
 	    findRecOpt="-maxdepth 1"
 	    ;;
 	d)
-	    findFilesOpt="$findFilesOpt -or -name *.BASE.* -or -name *.LOCAL.* -or -name *.BACKUP.* -or -name *.REMOTE.* -or -name *.orig"
+	    findFilesOpt="$findFilesOpt -or -name *.BASE.* -or -name *.LOCAL.* -or -name *.BACKUP.* -or -name *.REMOTE.* -or -name *_BASE_* -or -name *_LOCAL_* -or -name *_BACKUP_* -or -name *_REMOTE_* -or -name *.orig"
 	    ;;
     esac
 done
