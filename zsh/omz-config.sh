@@ -26,4 +26,4 @@ ZSH_CUSTOM=$CODE/Scripts/zsh-custom
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(colored-man-pages colorize command-not-found compleat cp extract git gradle)
+plugins=(battery colored-man-pages colorize command-not-found compleat cp docker extract git gradle kate)

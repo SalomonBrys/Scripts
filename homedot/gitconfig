@@ -9,9 +9,9 @@
 	unadd = reset HEAD
 	logs = log --pretty=medium --all --graph --decorate
 
-[branch "master"]
-	remote = origin
-	merge = refs/heads/master
+#[branch "master"]
+#	remote = origin
+#	merge = refs/heads/master
 
 [push]
 	default = simple
