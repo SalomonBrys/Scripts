@@ -16,9 +16,9 @@ export BROWSER="google-chrome"
 export LESS="-R"
 
 # Java home
-if hash java_home 2> /dev/null; then
-    export JAVA_HOME=$(java_home)
-fi
+#if hash java_home 2> /dev/null; then
+#    export JAVA_HOME=$(java_home)
+#fi
 
 alias emacs="emacs -nw"
 alias termreset='echo -e "\xF"'
